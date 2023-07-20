@@ -17,23 +17,19 @@ import 'features/stories/presentation/providers/stories_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize Firebase
   await Firebase.initializeApp();
-  
+
   // Initialize Hive
   await Hive.initFlutter();
-  
+
   // Initialize services
   await NotificationService.initialize();
   await AnalyticsService.initialize();
   await RealtimeService.initialize();
-  
-  runApp(
-    const ProviderScope(
-      child: SocialNetworkApp(),
-    ),
-  );
+
+  runApp(const ProviderScope(child: SocialNetworkApp()));
 }
 
 class SocialNetworkApp extends ConsumerWidget {
@@ -43,7 +39,7 @@ class SocialNetworkApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(themeModeProvider);
-    
+
     return MaterialApp.router(
       title: AppConfig.appName,
       debugShowCheckedModeBanner: false,
