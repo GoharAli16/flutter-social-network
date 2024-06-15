@@ -85,24 +85,12 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             icon: const Icon(Icons.videocam),
             onPressed: _startVideoCall,
           ),
-          IconButton(
-            icon: const Icon(Icons.call),
-            onPressed: _startVoiceCall,
-          ),
+          IconButton(icon: const Icon(Icons.call), onPressed: _startVoiceCall),
           PopupMenuButton(
             itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'info',
-                child: Text('Chat Info'),
-              ),
-              const PopupMenuItem(
-                value: 'media',
-                child: Text('Media'),
-              ),
-              const PopupMenuItem(
-                value: 'search',
-                child: Text('Search'),
-              ),
+              const PopupMenuItem(value: 'info', child: Text('Chat Info')),
+              const PopupMenuItem(value: 'media', child: Text('Media')),
+              const PopupMenuItem(value: 'search', child: Text('Search')),
             ],
             onSelected: _handleMenuAction,
           ),
@@ -122,7 +110,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               },
             ),
           ),
-          
+
           // Message Input
           _buildMessageInput(),
         ],
@@ -133,11 +121,13 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   Widget _buildMessageBubble(Map<String, dynamic> message) {
     final isMe = message['isMe'] as bool;
     final timestamp = message['timestamp'] as DateTime;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
-        mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isMe
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         children: [
           if (!isMe) ...[
             CircleAvatar(
@@ -197,9 +187,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
-        border: Border(
-          top: BorderSide(color: Colors.grey[300]!),
-        ),
+        border: Border(top: BorderSide(color: Colors.grey[300]!)),
       ),
       child: Row(
         children: [
@@ -207,10 +195,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             icon: const Icon(Icons.attach_file),
             onPressed: _attachFile,
           ),
-          IconButton(
-            icon: const Icon(Icons.camera_alt),
-            onPressed: _takePhoto,
-          ),
+          IconButton(icon: const Icon(Icons.camera_alt), onPressed: _takePhoto),
           Expanded(
             child: TextField(
               controller: _messageController,
@@ -219,7 +204,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
               ),
               maxLines: null,
               textCapitalization: TextCapitalization.sentences,
@@ -230,10 +218,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             icon: const Icon(Icons.mic),
             onPressed: _recordVoiceMessage,
           ),
-          IconButton(
-            icon: const Icon(Icons.send),
-            onPressed: _sendMessage,
-          ),
+          IconButton(icon: const Icon(Icons.send), onPressed: _sendMessage),
         ],
       ),
     );
@@ -242,7 +227,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   String _formatTime(DateTime timestamp) {
     final now = DateTime.now();
     final difference = now.difference(timestamp);
-    
+
     if (difference.inDays > 0) {
       return '${difference.inDays}d ago';
     } else if (difference.inHours > 0) {
@@ -289,16 +274,16 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   void _startVideoCall() {
     // Implement video call
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Starting video call...')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Starting video call...')));
   }
 
   void _startVoiceCall() {
     // Implement voice call
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Starting voice call...')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Starting voice call...')));
   }
 
   void _attachFile() {
@@ -353,9 +338,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
 
   void _showMedia() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Media gallery coming soon!')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Media gallery coming soon!')));
   }
 
   void _showSearch() {
